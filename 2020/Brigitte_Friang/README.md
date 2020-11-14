@@ -20,7 +20,7 @@ Opening this file reveals a grim landscape.
 
 ![Image](2.png)
 
-# Quick Glance
+## Quick Glance
 
 Type?
 
@@ -43,7 +43,7 @@ It is indeed hiding something.
 
 In multiple layers as it appears.
 
-# Extraction: Layer 1 / JPG → Disk Images
+## Extraction: Layer 1 / JPG → Disk Images
 
 ![Extraction 1](Section_A.png)
 
@@ -115,7 +115,7 @@ Relevant extracted files:
 - `part2.img`
 - `part3.img`
 
-# Extraction: Layer 2 / RAID5 Disk Images → VMware Virtual Machine Paging File
+## Extraction: Layer 2 / RAID5 Disk Images → VMware Virtual Machine Paging File
 
 ![Extraction 2](Section_B.png)
 
@@ -148,7 +148,7 @@ Relevant extracted file:
 
 Now, a third layer of extraction has to be performed.
 
-# Extraction: Layer 3 / VMware Virtual Machine Paging File → Encrypted Files
+## Extraction: Layer 3 / VMware Virtual Machine Paging File → Encrypted Files
 
 ![Extraction 3](Section_C.png)
 
@@ -313,11 +313,11 @@ Relevant extracted files:
 - `file.None.0xfffffa800107f9b0.dat`
 - `file.None.0xfffffa80010ea2f0.dat`
 
-# Decryption
+## Decryption
 
 ![Decryption](Section_D.png)
 
-## Assumption: Files Encrypted by the Regular Jigsaw Ransomware
+### Assumption: Files Encrypted by the Regular Jigsaw Ransomware
 
 In a new isolated Windows virtual machine, I tried to decrypt them using existing tools (for instance: [this one](https://www.bleepingcomputer.com/download/jigsaw-decrypter/) or [that one](https://github.com/steph3nsims/Jigsaw_Decrypt))
 
@@ -325,7 +325,7 @@ Unfortunately, the tools did not manage to decrypt them. It appears that the ran
 
 From [this file](https://github.com/steph3nsims/Jigsaw_Decrypt/blob/master/Jigsaw-Decrypt.ps1) and this [tweet](https://twitter.com/malwarescom/status/725518979649785856), I assumed that the original Jigsaw malware encrypted the files using AES with `OoIsAwwF23cICQoLDA0ODe==` as a password (in base64) and the following IV: `( 0, 1, 0, 3, 5, 3, 0, 1, 0, 0, 2, 0, 6, 7, 6, 0 )`. Hypothesis: the original password (or IV) has been modified for this challenge.
 
-## Reality: Files Encrypted by a Customized Jigsaw Ransomware
+### Reality: Files Encrypted by a Customized Jigsaw Ransomware
 
 Because the ransomware has probably been customized, it has to be reverse-engineered.
 
@@ -382,15 +382,15 @@ Output: Raw
 
 ![CyberChef](5.png)
 
->sU.]UCCQWU.UCD.Testiné à toute force alliée en mesure de nous venir en aide, nous la résistance d'Evil Country. Hier, nous sommes parvenus à mettre la main sur un dossier confidentiel émanant des services secrets d'Evil Gouv.
+>sU.]UCCQWU.UCD.ntended for any allied force able to help us—the resistance of Evil Country. Yesterday, we managed to get our hands on a confidential file from Evil Government's intelligence service.
 >
->Ces documents font mention d'une opération d'anéantissement de la résistance à l'aide d'un puissant agent innervant, le VX. L'attaque est prévue dans 4 jours à 4h40 au sein du fief de la résistance. 
+>These documents mention a resistance-killing operation using a powerful nerve agent, VX. The attack is scheduled to take place in 4 days at 4:40 in the stronghold of the resistance. 
 >
->Nous savons de source sure qu'un convoi permettant la synthèse du VX partira de l'entrepot Stockos de Bad Country vers le fief de la résistance d'ici quelques jours. Il faut intercepter ce convoi !
+>We know for sure that a convoy allowing the synthesis of VX will leave from the Stockos warehouse in Bad Country to the stronghold of the resistance in a few days. This convoy must be intercepted!
 >
->Contactez-nous à cette adresse : http://ctf.challengecybersec.fr/. . .
+>Contact us at this address: http://ctf.challengecybersec.fr/. . .
 
-Challenge solved.
+🚩 Challenge solved.
 
 
 *Quick note: retrospectively, the reverse engineering part was purely optional. A mere `strings` command would have sufficed.*
